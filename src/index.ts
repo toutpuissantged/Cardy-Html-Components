@@ -1,2 +1,2 @@
 export { Components, JSX } from './components';
-export { MyCard } from './components/my-component/cards/my-card';
+export { MyCard } from './components/cards/my-card';
