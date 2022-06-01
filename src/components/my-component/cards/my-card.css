@@ -1,0 +1,115 @@
+
+.card {
+  background-color: #fff;
+  border-radius: 2px;
+  width: 220px;
+  box-shadow: 0 1px 20px 2px rgba(0, 0, 0, 0.1);
+  padding: 0px ;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: stretch;
+}
+
+.card-header {
+  margin: 20px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px;
+}
+
+.card-title {
+  font-size: 24px;
+  font-weight: 300;
+  margin-bottom: 10px;
+}
+
+.title {
+  font-style: normal;
+  font-weight: 800;
+  font-size: 26px;
+  line-height: 54px;
+}
+
+.title-view {
+  color: #0B315E;
+}
+
+.title-count {
+  color: #0082F2;
+}
+
+.edit-view {
+  font-size: 0px;
+  cursor: pointer;
+}
+
+.icon {
+
+}
+
+.more-view {
+  width: 150px;
+  position: absolute;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  padding: 0%;
+  margin-top: 10px;
+  border: 1px solid #e6e6e6;
+  flex-direction: column;
+  padding-bottom: 5px;
+  padding-top: 2px;
+}
+
+.more-view p {
+  color: #0082F2;
+  font-size: 12px;
+  font-weight: 500;
+  margin: 0;
+  padding: 5px;
+  text-align: center;
+}
+
+.more-view-title {
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0;
+  padding: 5px;
+}
+
+.more-option-view {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 1px;
+}
+
+.more-option-view:hover {
+  background-color: #0082F2;
+  color: #fff;
+}
+
+.more-option-view:hover label {
+  color: #fff;
+}
+
+
+.more-option-view label {
+  color: black;
+  font-size: 12px;
+  font-weight: 500;
+  margin: 0;
+  padding: 8px;
+}
