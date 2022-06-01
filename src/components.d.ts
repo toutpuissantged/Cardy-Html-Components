@@ -8,8 +8,8 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface MyCard {
         "moreOption": Array<string>;
+        "nom": string;
         "number": number;
-        "title": string;
     }
     interface MyComponent {
         /**
@@ -51,9 +51,9 @@ declare global {
 declare namespace LocalJSX {
     interface MyCard {
         "moreOption"?: Array<string>;
+        "nom"?: string;
         "number"?: number;
         "onOptionChecked"?: (event: MyCardCustomEvent<any>) => void;
-        "title"?: string;
     }
     interface MyComponent {
         /**

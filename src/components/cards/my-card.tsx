@@ -1,5 +1,10 @@
 import { Component, Prop, h , getAssetPath, State , forceUpdate , Event, EventEmitter} from '@stencil/core';
 
+type OptionEmitType =  {
+  name: string;
+  checked: boolean;
+}
+
 @Component({
   tag: 'my-card',
   styleUrl: 'my-card.css',
@@ -19,11 +24,18 @@ export class MyCard {
 
   @State() renderNumber : number = 0;
 
-  @Prop() title : string;
+  @Prop() nom : string;
 
   @Prop() number : number;
 
-  @Event() optionChecked : EventEmitter;
+  @Event(
+    {
+      eventName: 'optionChecked',
+      composed: true,
+      cancelable: true,
+      bubbles: true,
+    }
+  ) optionCheckedEvent : EventEmitter;
 
   constructor() {
     this.moreOption.forEach(() => {
@@ -36,7 +48,19 @@ export class MyCard {
   }
 
   componentDidUpdate() {
-    console.log(this.moreOptionIsCheck);
+    //console.log(this.compactArraysToObject(this.moreOption, this.moreOptionIsCheck));
+    this.optionCheckedEvent.emit(this.compactArraysToObject(this.moreOption, this.moreOptionIsCheck));
+  }
+
+  compactArraysToObject = (arr1 : Array<string>, arr2 : Array<boolean>) : Array<OptionEmitType> => {
+    let obj : Array<OptionEmitType> = new Array(arr1.length);
+    arr1.forEach((item, index) => {
+      obj[index] = {
+        name : item,
+        checked : arr2[index]
+      };
+    });
+    return obj;
   }
 
   moreSelectAll = () :void => {
@@ -90,13 +114,18 @@ export class MyCard {
         <p class="more-view-title"  onClick={()=>{this.moreSelectionLogic()}}> Tout {!this.moreAllIsChecked()?"selectionner":"deselectionner"} </p>
         {
           this.moreOption.map((option,index) => {
-            return <div class="more-option-view" key={index}>
+            return <div class="more-option-view" key={index} onClick={()=>this.moreOptionClick(index)}>
                 <input
                   type="checkbox"
                   id={this.getChecboxId(index)}
-                  checked={this.moreOptionIsChecked(index)} onChange={()=>this.moreOptionClick(index)}
-                  />
-                <label htmlFor={this.getChecboxId(index)}>
+                  checked={this.moreOptionIsChecked(index)}
+                  onChange={()=>this.moreOptionClick(index)}
+                  onClick={()=>this.moreOptionClick(index)}
+                />
+                <label
+                  htmlFor={this.getChecboxId(index)}
+                  onClick={()=>this.moreOptionClick(index)}
+                >
                     {option}
                 </label>
             </div>
@@ -121,7 +150,7 @@ export class MyCard {
         </div>
         <div class="card-body">
             <div class="title title-view">
-                {this.title}
+                {this.nom}
             </div>
             <div class="title title-count">
                 {this.number}
