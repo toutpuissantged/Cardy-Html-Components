@@ -1,7 +1,7 @@
 {
-  "name": "mikawk",
+  "name": "cardy_html_component",
   "version": "0.0.1",
-  "description": "Stencil Component Starter",
+  "description": "custom card components",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
   "es2015": "dist/esm/index.mjs",
@@ -12,7 +12,7 @@
   "unpkg": "dist/mikawk/mikawk.esm.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ionic-team/stencil-component-starter.git"
+    "url": "https://github.com/toutpuissantged/Cardy-Html-Components.git"
   },
   "files": [
     "dist/",
@@ -23,7 +23,8 @@
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
-    "generate": "stencil generate"
+    "generate": "stencil generate",
+    "publish": "npm run build && stencil publish"
   },
   "dependencies": {
     "@stencil/core": "^2.13.0"
