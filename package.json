@@ -1,6 +1,6 @@
 {
   "name": "cardy_html_component",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "custom card components",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
@@ -23,8 +23,7 @@
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
-    "generate": "stencil generate",
-    "publish": "npm run build && stencil publish"
+    "generate": "stencil generate"
   },
   "dependencies": {
     "@stencil/core": "^2.13.0"
@@ -35,5 +34,22 @@
     "jest-cli": "^27.4.5",
     "puppeteer": "^10.0.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "author": {
+    "name": "toutpuissantged",
+    "email": "amoussougedeon13@gmail.com"
+  },
+  "contributors": [
+    {
+      "name": "toutpuissantged",
+      "email": "amoussougedeon13@gmail.com"
+    }
+  ],
+  "keywords": [
+    "card",
+    "component",
+    "custom",
+    "html",
+    "stencil"
+  ]
 }

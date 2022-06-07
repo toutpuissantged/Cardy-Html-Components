@@ -50,6 +50,16 @@ export class MyCard {
   componentDidUpdate() {
     //console.log(this.compactArraysToObject(this.moreOption, this.moreOptionIsCheck));
     this.optionCheckedEvent.emit(this.compactArraysToObject(this.moreOption, this.moreOptionIsCheck));
+    const concernedElement = document.querySelector(".more-view");
+
+    document.addEventListener("mousedown", (event : any) => {
+      console.log(event);
+      if (concernedElement.contains(event.target)) {
+        console.log("Clicked Inside");
+      } else {
+        console.log("Clicked Outside / Elsewhere");
+      }
+    });
   }
 
   compactArraysToObject = (arr1 : Array<string>, arr2 : Array<boolean>) : Array<OptionEmitType> => {
@@ -108,9 +118,15 @@ export class MyCard {
     this.more_is_open = !this.more_is_open;
   }
 
+  closeMoreModal = () : void => {
+    this.more_is_open = false;
+    console.log('closeMoreModal');
+    
+  }
+
   More = ({}) => {
     if(!this.more_is_open) return null;
-    return <div class="more-view">
+    return <div class="more-view" onBlur={()=>{this.closeMoreModal()}}>
         <p class="more-view-title"  onClick={()=>{this.moreSelectionLogic()}}> Tout {!this.moreAllIsChecked()?"selectionner":"deselectionner"} </p>
         {
           this.moreOption.map((option,index) => {
