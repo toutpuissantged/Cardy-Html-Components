@@ -104,8 +104,12 @@ const ConvertClassObjectToArray = (classObject) => {
 
 const domAllCheckedWatcher = () =>{
     const selectAll = document.querySelector('#selectAll')
+    if(checkIfAllChecked()){
+        selectAll.checked = true
+    }else{
+        selectAll.checked = false
+    }
     selectAll.addEventListener('change', (e) => {
-      
       if(e.target.checked){
           checkedAll()
       }else{
@@ -124,6 +128,7 @@ const domAllCheckedWatcher = () =>{
       console.log(" domAmll");
       //FindAllCardAndUpdateData()
     })
+
 }
 
 domAllCheckedWatcher()
