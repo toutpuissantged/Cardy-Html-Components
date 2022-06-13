@@ -16,7 +16,7 @@
 
 .card-header {
   margin: 2px;
-  margin-bottom: 3px;
+  margin-bottom: 0px;
   display: flex;
   justify-content: space-between;
   align-content: flex-start;

@@ -1,4 +1,4 @@
-import { Component, Prop, h , getAssetPath, State , forceUpdate , Event, EventEmitter} from '@stencil/core';
+import { Component, Prop, h , getAssetPath, State , forceUpdate , Event, EventEmitter , Method} from '@stencil/core';
 
 type OptionEmitType =  {
   name: string;
@@ -17,6 +17,24 @@ export class MyCard {
   @State() more_is_open: boolean = false;
 
   @Prop() moreOption : Array<string> = [];
+
+  @Method() 
+  async selectAllOption(){
+    this.moreOptionIsCheck.fill(true);
+    forceUpdate(this);
+  }
+
+  @Method()
+  async diselectAllOption(){
+    this.moreOptionIsCheck.fill(false);
+    forceUpdate(this);
+  }
+
+  @Method()
+  async updateMoreOption(value : Array<boolean>){
+    this.moreOptionIsCheck = value;
+    forceUpdate(this);
+  }
 
   @State() moreOptionIsCheck : Array<boolean> = [];
 

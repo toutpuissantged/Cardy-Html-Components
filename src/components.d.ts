@@ -7,9 +7,12 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface MyCard {
+        "diselectAllOption": () => Promise<void>;
         "moreOption": Array<string>;
         "nom": string;
         "number": number;
+        "selectAllOption": () => Promise<void>;
+        "updateMoreOption": (value: Array<boolean>) => Promise<void>;
     }
     interface MyComponent {
         /**

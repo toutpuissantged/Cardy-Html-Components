@@ -9,13 +9,125 @@
     <script nomodule src="/build/mikawk.js"></script>
   </head>
   <body>
-    <my-card nom="CP1" number="30"></my-card>
+    <section class="">
+      <div class="color-primary">
+          <input type="checkbox" name="selectAll" id="selectAll" class="">
+          <label for="selectAll" class="t-d-underline"> Tout selectionner </label>
+      </div>
+  </section>
+  <section class="flex-row flex max-w-50" id="card-container"></section>
   </body>
   <script>
-    const myCard = document.querySelector('my-card');
-    myCard.moreOption = ["CM2 A", "CM2 B", "CM2 C"]
-    myCard.addEventListener('optionChecked', (e) => {
-      console.log(e.detail);
-    });
+    const classesSchools = ["CP1","CP2"]
+const classSchoolLists = new Array(0)
+new Array(classesSchools.length).fill(0).map((_, i) => {
+    const card_container = document.querySelector('#card-container')
+    const card = document.createElement('my-card')
+    card.nom = classesSchools[i]
+    card.number = i
+    card.className="mv-1"
+    const classSchoolList = [card.nom+" A", card.nom+" B", card.nom+" C"]
+    const filtered = classSchoolList.map((classSchool, j) => {
+        const obj = {
+            name : classSchool,
+            checked : false,
+        }
+        return obj
+    })
+    classSchoolLists.push(filtered)
+    //card.moreOption = classSchoolLists[i]
+    card.moreOption = classSchoolList
+    card.addEventListener('optionChecked', (e) => {
+        const details  = e.detail
+        classSchoolLists[i] = details
+        console.log(details ,i);
+        domAllCheckedWatcher()
+    })
+    card_container.appendChild(card)
+    return {
+        nom: 'CP' + i,
+        number: i
+    }
+})
+
+const checkIfAllChecked = () => {
+    let allChecked = true
+    classSchoolLists.forEach((classSchoolList) => {
+        classSchoolList.forEach((classSchool) => {
+            if(!classSchool.checked){
+                allChecked = false
+            }
+        })
+    })
+    console.log("allChecked", allChecked);
+    return allChecked
+}
+
+const checkedAll = () => {
+    classSchoolLists.forEach((classSchoolList) => {
+        classSchoolList.forEach((classSchool) => {
+            classSchool.checked = true
+        })
+    })
+}
+
+const discheckedAll = () => {
+    classSchoolLists.forEach((classSchoolList) => {
+        classSchoolList.forEach((classSchool) => {
+            classSchool.checked = false
+        })
+    })
+}
+
+const FindAllCardAndUpdateData = () => {
+    const cards = document.querySelectorAll('my-card')
+    cards.forEach((card,index) => {
+        card.moreOption = classSchoolLists[index]
+        console.log(card.moreOption);
+    })
+}
+
+const updateCardOption = (value, index) => {
+  (async () => {
+    await customElements.whenDefined('my-card');
+    const Element = await document.querySelectorAll('my-card')[index]
+    await Element.updateMoreOption(value)
+  })();
+}
+
+const ConvertClassObjectToArray = (classObject) => {
+  const result  = classObject.map((classSchool) => {
+    return classSchool.checked
+  })
+  return result
+}
+
+const domAllCheckedWatcher = () =>{
+    const selectAll = document.querySelector('#selectAll')
+    selectAll.addEventListener('change', (e) => {
+      
+      if(e.target.checked){
+          checkedAll()
+      }else{
+          discheckedAll()
+      }
+      if(checkIfAllChecked()){
+          selectAll.checked = true
+      }else{
+          selectAll.checked = false
+      }
+      //updateCardOption(Array(3).fill(true) , 0)
+      classSchoolLists.forEach((classSchoolList, index) => {
+        classSchooListFormated = ConvertClassObjectToArray(classSchoolList)
+        updateCardOption(classSchooListFormated, index)
+      })
+      console.log(" domAmll");
+      //FindAllCardAndUpdateData()
+    })
+}
+
+domAllCheckedWatcher()
+
+console.log(classSchoolLists)
   </script>
 </html>
