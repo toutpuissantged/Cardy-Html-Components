@@ -17,8 +17,8 @@
   </section>
   <section class="flex-row flex max-w-50" id="card-container"></section>
   </body>
-  <script>
-    const classesSchools = ["CP1","CP2"]
+<script>
+const classesSchools = ["CP1","CP2"] 
 const classSchoolLists = new Array(0)
 new Array(classesSchools.length).fill(0).map((_, i) => {
     const card_container = document.querySelector('#card-container')
@@ -51,6 +51,10 @@ new Array(classesSchools.length).fill(0).map((_, i) => {
 })
 
 const checkIfAllChecked = () => {
+  /**
+  * Check if all checkbox are checked
+  * @return {boolean}
+  */
     let allChecked = true
     classSchoolLists.forEach((classSchoolList) => {
         classSchoolList.forEach((classSchool) => {
@@ -59,11 +63,14 @@ const checkIfAllChecked = () => {
             }
         })
     })
-    console.log("allChecked", allChecked);
+    //console.log("allChecked", allChecked);
     return allChecked
 }
 
 const checkedAll = () => {
+  /**
+  * active all cards option checkbox 
+  */
     classSchoolLists.forEach((classSchoolList) => {
         classSchoolList.forEach((classSchool) => {
             classSchool.checked = true
@@ -72,22 +79,35 @@ const checkedAll = () => {
 }
 
 const discheckedAll = () => {
-    classSchoolLists.forEach((classSchoolList) => {
-        classSchoolList.forEach((classSchool) => {
-            classSchool.checked = false
-        })
-    })
+  /**
+  * desactive all cards option checkbox
+  */
+
+  classSchoolLists.forEach((classSchoolList) => {
+      classSchoolList.forEach((classSchool) => {
+          classSchool.checked = false
+      })
+  })
 }
 
 const FindAllCardAndUpdateData = () => {
-    const cards = document.querySelectorAll('my-card')
-    cards.forEach((card,index) => {
-        card.moreOption = classSchoolLists[index]
-        console.log(card.moreOption);
-    })
+  /**
+  * Find all cards and update data
+  */
+  const cards = document.querySelectorAll('my-card')
+  cards.forEach((card,index) => {
+      card.moreOption = classSchoolLists[index]
+      console.log(card.moreOption);
+  })
 }
 
+
 const updateCardOption = (value, index) => {
+  /**
+   * Update card option using stencil Methods Api
+   * @param {Array} value - array of option
+   * @param {Number} index - index of card
+  */
   (async () => {
     await customElements.whenDefined('my-card');
     const Element = await document.querySelectorAll('my-card')[index]
@@ -96,6 +116,11 @@ const updateCardOption = (value, index) => {
 }
 
 const ConvertClassObjectToArray = (classObject) => {
+  /**
+   * Convert class object to array
+   * @param {Object} classObject - class object
+   * @return {Array} array of class
+   */
   const result  = classObject.map((classSchool) => {
     return classSchool.checked
   })
@@ -103,36 +128,36 @@ const ConvertClassObjectToArray = (classObject) => {
 }
 
 const domAllCheckedWatcher = () =>{
-    const selectAll = document.querySelector('#selectAll')
+  /**
+   * Watch if all checkbox are checked
+  */
+  const selectAll = document.querySelector('#selectAll')
+  if(checkIfAllChecked()){
+      selectAll.checked = true
+  }else{
+      selectAll.checked = false
+  }
+  selectAll.addEventListener('change', (e) => {
+    if(e.target.checked){
+        checkedAll()
+    }else{
+        discheckedAll()
+    }
     if(checkIfAllChecked()){
         selectAll.checked = true
     }else{
         selectAll.checked = false
     }
-    selectAll.addEventListener('change', (e) => {
-      if(e.target.checked){
-          checkedAll()
-      }else{
-          discheckedAll()
-      }
-      if(checkIfAllChecked()){
-          selectAll.checked = true
-      }else{
-          selectAll.checked = false
-      }
-      //updateCardOption(Array(3).fill(true) , 0)
-      classSchoolLists.forEach((classSchoolList, index) => {
-        classSchooListFormated = ConvertClassObjectToArray(classSchoolList)
-        updateCardOption(classSchooListFormated, index)
-      })
-      console.log(" domAmll");
-      //FindAllCardAndUpdateData()
+    classSchoolLists.forEach((classSchoolList, index) => {
+      classSchooListFormated = ConvertClassObjectToArray(classSchoolList)
+      updateCardOption(classSchooListFormated, index)
     })
-
+    console.log(" domAmll");
+  })
 }
 
 domAllCheckedWatcher()
 
-console.log(classSchoolLists)
-  </script>
+//console.log(classSchoolLists)
+</script>
 </html>

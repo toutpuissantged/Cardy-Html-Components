@@ -21,6 +21,39 @@
 | `optionChecked` |             | `CustomEvent<any>` |
 
 
+## Methods
+
+### `diselectAllOption() => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+### `selectAllOption() => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+### `updateMoreOption(value: Array<boolean>) => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*
